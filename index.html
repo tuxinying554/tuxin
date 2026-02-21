@@ -2,8 +2,8 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>扫码导航 · 途辛汽车美容</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>途辛汽车美容 · 导航中心</title>
     <style>
         * {
             margin: 0;
@@ -12,7 +12,7 @@
             font-family: system-ui, -apple-system, 'Helvetica Neue', 'PingFang SC', 'Microsoft YaHei', sans-serif;
         }
         body {
-            background: linear-gradient(145deg, #f0f2f5 0%, #f8f9fc 100%);
+            background: #f2f5f9;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -20,209 +20,306 @@
             padding: 16px;
         }
         .card {
-            max-width: 420px;
+            max-width: 460px;
             width: 100%;
-            background: rgba(255,255,255,0.9);
-            backdrop-filter: blur(6px);
-            -webkit-backdrop-filter: blur(6px);
-            border-radius: 36px;
-            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25), 0 2px 10px 0 rgba(0,0,0,0.08);
-            padding: 28px 22px 32px 22px;
-            border: 1px solid rgba(255,255,255,0.5);
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            border-radius: 40px;
+            box-shadow: 0 30px 60px -20px rgba(0,30,60,0.3), 0 8px 20px -8px rgba(0,0,0,0.2);
+            padding: 30px 24px 32px 24px;
+            border: 1px solid rgba(255,255,255,0.7);
         }
         .shop-header {
             text-align: center;
-            margin-bottom: 24px;
+            margin-bottom: 18px;
         }
         .shop-name {
-            font-size: 26px;
-            font-weight: 700;
+            font-size: 30px;
+            font-weight: 800;
             letter-spacing: 1px;
-            color: #1e293b;
+            color: #0b1e32;
             line-height: 1.2;
-            margin-bottom: 6px;
-            word-break: break-word;
+            margin-bottom: 8px;
+            text-shadow: 0 2px 5px rgba(255,255,255,0.8);
         }
-        .shop-badge {
-            display: inline-block;
-            background: #e9eef3;
-            color: #3c4b5c;
+        .shop-sub {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 8px;
+        }
+        .badge {
+            background: #e2e9f3;
+            color: #1e3a5f;
             font-size: 14px;
-            font-weight: 500;
+            font-weight: 600;
             padding: 5px 16px;
             border-radius: 40px;
-            backdrop-filter: blur(4px);
-            box-shadow: inset 0 1px 3px rgba(255,255,255,0.7);
+            box-shadow: inset 0 1px 4px rgba(255,255,255,0.8);
         }
-        .coordinate-hint {
+        .detail-link {
+            background: #ffffffcc;
+            border: 1px solid #cad5e2;
+            color: #2c577c;
             font-size: 13px;
-            color: #64748b;
-            margin-top: 10px;
-            background: rgba(255,255,255,0.7);
-            padding: 6px 12px;
-            border-radius: 30px;
+            padding: 5px 14px;
+            border-radius: 40px;
+            text-decoration: none;
             display: inline-flex;
             align-items: center;
+            gap: 4px;
+            transition: 0.2s;
+        }
+        .detail-link:hover {
+            background: white;
+            border-color: #8aa9c9;
+        }
+        .coord-panel {
+            background: #eef2f7;
+            border-radius: 50px;
+            padding: 10px 18px;
+            margin: 20px 0 14px 0;
+            font-size: 14px;
+            color: #1e3b5a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 8px;
+            border: 1px solid #cdddec;
+        }
+        .coord-left {
+            display: flex;
+            align-items: center;
             gap: 6px;
-            border: 1px solid rgba(0,0,0,0.03);
+            font-weight: 500;
         }
-        .divider {
-            margin: 28px 0 22px 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, #cbd5e1, transparent);
+        .coord-badge {
+            background: #3f6b9c;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 30px;
+            font-size: 12px;
+            font-weight: 500;
         }
-        .btn-group {
+        .coord-value {
+            font-family: 'SF Mono', monospace;
+            background: white;
+            padding: 4px 8px;
+            border-radius: 30px;
+            font-size: 13px;
+        }
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f3a57;
+            margin: 28px 0 16px 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-title span {
+            background: #cbdbe9;
+            height: 2px;
+            flex: 1;
+            border-radius: 2px;
+        }
+        .nav-grid {
             display: flex;
             flex-direction: column;
             gap: 14px;
         }
-        .btn {
+        .nav-row {
+            display: flex;
+            gap: 12px;
+            align-items: stretch;
+        }
+        .nav-btn {
+            flex: 2;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            padding: 18px 10px;
-            border-radius: 60px;
+            gap: 8px;
+            padding: 16px 8px;
+            border-radius: 50px;
             font-size: 18px;
             font-weight: 600;
-            text-align: center;
             text-decoration: none;
             border: none;
             cursor: pointer;
-            transition: transform 0.12s ease, box-shadow 0.2s ease;
-            box-shadow: 0 8px 18px -6px rgba(0,0,0,0.2);
-            border: 1px solid rgba(255,255,255,0.3);
+            transition: 0.15s;
+            box-shadow: 0 8px 16px -10px rgba(0,50,80,0.3);
+            border: 1px solid rgba(255,255,255,0.4);
+            color: white;
         }
-        .btn:active {
-            transform: scale(0.98);
-            box-shadow: 0 4px 8px -4px rgba(0,0,0,0.2);
-        }
-        .btn i { font-style: normal; font-size: 22px; line-height: 1; }
-        .btn span { flex: 1; text-align: center; }
-        
-        .amap { background: #1B6AFF; color: white; }
-        .qqmap { background: #12B7F5; color: white; }
-        .bdmap { background: #29D0D3; color: white; }
-
-        .footer-note {
-            margin-top: 32px;
-            text-align: center;
-            font-size: 13px;
-            color: #7e8b9e;
-            border-top: 1px dashed #d4dae3;
-            padding-top: 22px;
-        }
-        .fallback-tip {
-            background: #f1f4f9;
-            border-radius: 50px;
-            padding: 10px 16px;
+        .nav-btn:active { transform: scale(0.97); }
+        .nav-btn.small {
+            flex: 1;
             font-size: 14px;
-            color: #2d3a4b;
+            padding: 16px 4px;
+            background: #ffffffd9;
+            color: #1e3a5f;
+            box-shadow: 0 4px 8px -6px #264d73;
+            border: 1px solid white;
+            font-weight: 500;
+            gap: 4px;
+        }
+        .amap-main { background: #1B6AFF; }
+        .qqmap-main { background: #12B7F5; }
+        .bdmap-main { background: #29D0D3; }
+        
+        .detail-badge {
+            background: #ffffffd9;
+            color: #0b2c44;
+            border-radius: 40px;
+            padding: 12px 16px;
+            margin-top: 24px;
+            border: 1px solid #bed0e3;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: 15px;
+        }
+        .detail-badge a {
+            color: #1a5c9e;
+            text-decoration: none;
+            font-weight: 600;
+            background: #e1ebf7;
+            padding: 8px 18px;
+            border-radius: 40px;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
-            max-width: 100%;
-            flex-wrap: wrap;
-            justify-content: center;
+            gap: 5px;
+            transition: 0.2s;
         }
-        .fallback-tip span {
-            background: white;
-            padding: 4px 12px;
-            border-radius: 40px;
-            font-weight: 600;
-            color: #0b2c4b;
-            margin: 0 3px;
+        .detail-badge a:hover {
+            background: #cde0f2;
         }
-        .highlight {
-            color: #0d5e9c;
-            font-weight: 600;
+        .footer-light {
+            margin-top: 28px;
+            color: #6f88a0;
+            font-size: 13px;
+            text-align: center;
+            border-top: 1px dashed #bccfdf;
+            padding-top: 22px;
         }
     </style>
 </head>
 <body>
     <div class="card">
         <div class="shop-header">
-            <div class="shop-name" id="shopNameDisplay">途辛汽车美容服务中心</div>
-            <div class="shop-badge">🚗 扫码 · 一键导航</div>
-            <div class="coordinate-hint" id="coordDisplay">
-                <span>📍 读取坐标中…</span>
+            <div class="shop-name" id="shopNameDisplay">途辛汽车美容</div>
+            <div class="shop-sub">
+                <span class="badge">🚘 专享导航码</span>
+                <a href="javascript:void(0)" id="copyCoordLink" class="detail-link">📋 复制坐标</a>
             </div>
         </div>
 
-        <div class="btn-group">
-            <!-- 高德地图按钮 -->
-            <a class="btn amap" id="amapBtn" href="javascript:void(0);">
-                <i>🗺️</i>
-                <span>高德地图导航</span>
-                <i style="opacity:0.8;">→</i>
-            </a>
-            <!-- 腾讯地图按钮 -->
-            <a class="btn qqmap" id="qqmapBtn" href="javascript:void(0);">
-                <i>🧭</i>
-                <span>腾讯地图导航</span>
-                <i style="opacity:0.8;">→</i>
-            </a>
-            <!-- 百度地图按钮 -->
-            <a class="btn bdmap" id="bdmapBtn" href="javascript:void(0);">
-                <i>🌐</i>
-                <span>百度地图导航</span>
-                <i style="opacity:0.8;">→</i>
-            </a>
+        <!-- 坐标状态栏 (动态显示) -->
+        <div class="coord-panel" id="coordPanel">
+            <div class="coord-left">
+                <span>📍 定位</span>
+                <span class="coord-badge" id="coordSourceBadge">默认</span>
+            </div>
+            <div class="coord-value" id="coordDisplay">23.436648, 116.149225</div>
         </div>
 
-        <!-- 备用说明：如果没装app会自动打开网页版 -->
-        <div class="footer-note">
-            <div class="fallback-tip">
-                ⚡ 没装App？<span>自动打开网页版</span>也可规划路线
+        <!-- 核心导航: 三个主要按钮 (动态跳转) -->
+        <div class="section-title">
+            <span>🗺️</span> 选择地图导航 <span></span>
+        </div>
+        <div class="nav-grid">
+            <!-- 高德 + 详情入口 -->
+            <div class="nav-row">
+                <a class="nav-btn amap-main" id="amapNavBtn" href="javascript:void(0);">
+                    <span>🗺️ 高德地图</span>
+                </a>
+                <a class="nav-btn small" id="amapDetailBtn" href="https://surl.amap.com/TjKQMuk4HT" target="_blank" rel="noopener noreferrer">
+                    <span>📋 详情</span>
+                </a>
             </div>
-            <div style="margin-top: 14px; color: #90a1b5;">
-                长按识别 · 永久导航码
+            <!-- 腾讯 + 详情入口 -->
+            <div class="nav-row">
+                <a class="nav-btn qqmap-main" id="qqmapNavBtn" href="javascript:void(0);">
+                    <span>🧭 腾讯地图</span>
+                </a>
+                <a class="nav-btn small" id="qqmapDetailBtn" href="https://mmapgwh.map.qq.com/shortlink/short?l=_affc85625bc234bf115728bde2e21b2c" target="_blank" rel="noopener noreferrer">
+                    <span>📋 详情</span>
+                </a>
             </div>
+            <!-- 百度 + 详情入口 -->
+            <div class="nav-row">
+                <a class="nav-btn bdmap-main" id="bdmapNavBtn" href="javascript:void(0);">
+                    <span>🌐 百度地图</span>
+                </a>
+                <a class="nav-btn small" id="bdmapDetailBtn" href="https://j.map.baidu.com/31/aNYk" target="_blank" rel="noopener noreferrer">
+                    <span>📋 详情</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- 店铺详情聚合区 (三个分享链接都在这里展示) -->
+        <div class="detail-badge">
+            <span>✨ 店铺主页</span>
+            <span style="display: flex; gap: 10px; flex-wrap: wrap;">
+                <a href="https://surl.amap.com/TjKQMuk4HT" target="_blank" rel="noopener">高德</a>
+                <a href="https://mmapgwh.map.qq.com/shortlink/short?l=_affc85625bc234bf115728bde2e21b2c" target="_blank" rel="noopener">腾讯</a>
+                <a href="https://j.map.baidu.com/31/aNYk" target="_blank" rel="noopener">百度</a>
+            </span>
+        </div>
+
+        <div class="footer-light">
+            📌 点击「导航」直接规划路线 · 点击「详情」查看店铺信息<br>没装App会自动打开网页版
         </div>
     </div>
 
     <script>
         (function() {
-            // 默认坐标 (备用: 高德/腾讯 gcj-02)
+            // ----- 固定分享链接 (你提供的地图详情页) -----
+            const SHARE_LINKS = {
+                amap: 'https://surl.amap.com/TjKQMuk4HT',
+                qqmap: 'https://mmapgwh.map.qq.com/shortlink/short?l=_affc85625bc234bf115728bde2e21b2c',
+                bdmap: 'https://j.map.baidu.com/31/aNYk'
+            };
+
+            // 默认坐标 (GCJ-02 高德/腾讯系)
             const DEFAULT_LAT = 23.436648;
             const DEFAULT_LNG = 116.149225;
+            const DEFAULT_NAME = '途辛汽车美容服务中心';
 
-            // 店铺名称 (也可从参数获取，但一般固定)
-            const DEFAULT_SHOP_NAME = "途辛汽车美容服务中心";
-
-            // ---------- 从URL获取参数 ----------
+            // ----- 解析URL参数 -----
             function getQueryParams() {
                 const params = new URLSearchParams(window.location.search);
-                let lat = params.get('lat');
-                let lng = params.get('lng');
-                let name = params.get('name'); // 可选：名称也通过参数自定义
+                let lat = parseFloat(params.get('lat'));
+                let lng = parseFloat(params.get('lng'));
+                let name = params.get('name');
 
-                // 转换为数字，并校验有效性
-                let validLat = !isNaN(parseFloat(lat)) && isFinite(lat) ? parseFloat(lat) : null;
-                let validLng = !isNaN(parseFloat(lng)) && isFinite(lng) ? parseFloat(lng) : null;
+                // 校验坐标有效性
+                const isValid = (v) => typeof v === 'number' && !isNaN(v) && isFinite(v);
+                let validLat = isValid(lat) ? lat : null;
+                let validLng = isValid(lng) ? lng : null;
 
-                // 粗略范围检查 (中国大陆大致经纬度范围)
-                if (validLat !== null) {
-                    if (validLat < 3 || validLat > 54) validLat = null;   // 纬度非法
-                }
-                if (validLng !== null) {
-                    if (validLng < 73 || validLng > 136) validLng = null; // 经度非法
-                }
+                // 粗略范围 (中国大陆)
+                if (validLat !== null && (validLat < 3 || validLat > 54)) validLat = null;
+                if (validLng !== null && (validLng < 73 || validLng > 136)) validLng = null;
 
-                // 如果任一坐标无效，则使用默认坐标
                 if (validLat === null || validLng === null) {
                     return {
                         lat: DEFAULT_LAT,
                         lng: DEFAULT_LNG,
-                        name: name || DEFAULT_SHOP_NAME,
+                        name: name || DEFAULT_NAME,
                         fromParam: false
                     };
                 }
-
                 return {
                     lat: validLat,
                     lng: validLng,
-                    name: name || DEFAULT_SHOP_NAME,
+                    name: name || DEFAULT_NAME,
                     fromParam: true
                 };
             }
@@ -231,20 +328,18 @@
             const currentLat = params.lat;
             const currentLng = params.lng;
             const shopName = params.name;
+            const fromParam = params.fromParam;
 
-            // 更新页面显示的店名
+            // 更新店名
             document.getElementById('shopNameDisplay').innerText = shopName;
 
-            // 显示当前使用的坐标 (便于调试)
-            const coordSpan = document.getElementById('coordDisplay');
-            if (params.fromParam) {
-                coordSpan.innerHTML = `<span>📍 当前坐标 • 来自二维码</span><span style="font-family:monospace;"> ${currentLat.toFixed(6)}, ${currentLng.toFixed(6)}</span>`;
-            } else {
-                coordSpan.innerHTML = `<span>📍 默认坐标 • 途辛总店</span><span style="font-family:monospace;"> ${currentLat.toFixed(6)}, ${currentLng.toFixed(6)}</span>`;
-            }
+            // 更新坐标显示
+            const coordDisplay = document.getElementById('coordDisplay');
+            const sourceBadge = document.getElementById('coordSourceBadge');
+            coordDisplay.innerText = `${currentLat.toFixed(6)}, ${currentLng.toFixed(6)}`;
+            sourceBadge.innerText = fromParam ? '来自二维码' : '默认总店';
 
-            // ---------- 坐标转换工具 (百度 与 高德/腾讯 互转) ----------
-            // 高德/腾讯 (GCJ-02) 转 百度 (BD-09)
+            // ----- 坐标转换工具 (GCJ-02 -> BD-09) -----
             function gcj02ToBd09(lng, lat) {
                 const x = lng;
                 const y = lat;
@@ -255,43 +350,65 @@
                 return { lng: bdLng, lat: bdLat };
             }
 
-            // 本项目中高德/腾讯使用同一套坐标 (GCJ-02)
+            // 高德/腾讯坐标 (GCJ-02)
             const gcjLng = currentLng;
             const gcjLat = currentLat;
+            // 百度坐标
+            const bd = gcj02ToBd09(gcjLng, gcjLat);
+            const bdLng = bd.lng;
+            const bdLat = bd.lat;
 
-            // 计算百度坐标 (BD-09)
-            const bdCoord = gcj02ToBd09(gcjLng, gcjLat);
-            const bdLng = bdCoord.lng;
-            const bdLat = bdCoord.lat;
+            // ----- 构建导航URL (动态坐标版) -----
+            const amapNavUrl = `https://uri.amap.com/marker?position=${gcjLng},${gcjLat}&name=${encodeURIComponent(shopName)}&src=mypage&coordinate=gcj02`;
+            const qqmapNavUrl = `https://apis.map.qq.com/uri/v1/marker?marker=coord:${gcjLat},${gcjLng};title:${encodeURIComponent(shopName)};addr:${encodeURIComponent(shopName)}&referer=wxqrcode`;
+            const bdmapNavUrl = `https://api.map.baidu.com/marker?location=${bdLat},${bdLng}&title=${encodeURIComponent(shopName)}&output=html&src=webapp`;
 
-            // ---------- 构建跳转URL ----------
-            // 高德地图 (GCJ-02)
-            const amapUrl = `https://uri.amap.com/marker?position=${gcjLng},${gcjLat}&name=${encodeURIComponent(shopName)}&src=mypage&coordinate=gcj02`;
-
-            // 腾讯地图 (GCJ-02)
-            const qqmapUrl = `https://apis.map.qq.com/uri/v1/marker?marker=coord:${gcjLat},${gcjLng};title:${encodeURIComponent(shopName)};addr:${encodeURIComponent(shopName)}&referer=wxqrcode`;
-
-            // 百度地图 (BD-09) 使用百度坐标
-            const bdmapUrl = `https://api.map.baidu.com/marker?location=${bdLat},${bdLng}&title=${encodeURIComponent(shopName)}&output=html&src=webapp#qrcode`;
-
-            // 绑定点击事件 (替代原有的href，以防微信内奇葩拦截)
-            document.getElementById('amapBtn').addEventListener('click', function(e) {
+            // ----- 绑定导航按钮 (动态坐标跳转) -----
+            document.getElementById('amapNavBtn').addEventListener('click', (e) => {
                 e.preventDefault();
-                window.location.href = amapUrl;
+                window.location.href = amapNavUrl;
+            });
+            document.getElementById('qqmapNavBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = qqmapNavUrl;
+            });
+            document.getElementById('bdmapNavBtn').addEventListener('click', (e) => {
+                e.preventDefault();
+                window.location.href = bdmapNavUrl;
             });
 
-            document.getElementById('qqmapBtn').addEventListener('click', function(e) {
+            // ----- 详情按钮已经通过href固定指向分享链接，不需要额外绑定 -----
+            // 但为了防止误触，确保target="_blank"
+            document.getElementById('amapDetailBtn').setAttribute('target', '_blank');
+            document.getElementById('qqmapDetailBtn').setAttribute('target', '_blank');
+            document.getElementById('bdmapDetailBtn').setAttribute('target', '_blank');
+
+            // ----- 复制坐标功能 (方便调试) -----
+            document.getElementById('copyCoordLink').addEventListener('click', (e) => {
                 e.preventDefault();
-                window.location.href = qqmapUrl;
+                const textToCopy = `${currentLat},${currentLng}`;
+                if (navigator.clipboard && navigator.clipboard.writeText) {
+                    navigator.clipboard.writeText(textToCopy).then(() => {
+                        alert('✅ 坐标已复制：' + textToCopy);
+                    }).catch(() => {
+                        fallbackCopy(textToCopy);
+                    });
+                } else {
+                    fallbackCopy(textToCopy);
+                }
             });
 
-            document.getElementById('bdmapBtn').addEventListener('click', function(e) {
-                e.preventDefault();
-                window.location.href = bdmapUrl;
-            });
+            function fallbackCopy(text) {
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert('✅ 坐标已复制：' + text);
+            }
 
-            // 可选：长按或辅助提示（已经显示了坐标）
-            console.log('扫码导航已准备，当前坐标:', gcjLat, gcjLng, '百度坐标:', bdLat, bdLng);
+            console.log('混合模式已启动', { 动态导航: { amapNavUrl, qqmapNavUrl, bdmapNavUrl }, 分享链接: SHARE_LINKS });
         })();
     </script>
 </body>
