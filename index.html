@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>导航到店</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:system-ui, -apple-system, sans-serif;
+        }
+        body{
+            padding:40px 20px;
+            background:#f5f5f5;
+        }
+        .container{
+            max-width:400px;
+            margin:0 auto;
+        }
+        .title{
+            text-align:center;
+            font-size:20px;
+            margin-bottom:30px;
+            color:#333;
+        }
+        .btn{
+            display:block;
+            width:100%;
+            padding:18px;
+            border-radius:12px;
+            font-size:17px;
+            font-weight:500;
+            text-align:center;
+            text-decoration:none;
+            margin-bottom:16px;
+            border:none;
+            cursor:pointer;
+        }
+        .amap{
+            background:#1677ff;
+            color:white;
+        }
+        .qqmap{
+            background:#12b7f5;
+            color:white;
+        }
+        .bdmap{
+            background:#28d0d3;
+            color:white;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">途辛汽车美容服务中心</div>
+        
+        <a class="btn amap" id="amap">高德地图导航</a >
+        <a class="btn qqmap" id="qqmap">腾讯地图导航</a >
+        <a class="btn bdmap" id="bdmap">百度地图导航</a >
+    </div>
+
+    <script>
+        // 店铺名称（保留，不影响跳转）
+        const shopName = "途辛汽车美容服务中心";
+
+        // 替换为你提供的三大地图分享链接
+        const amapLink = "https://surl.amap.com/TjKQMuk4HT"; // 高德
+        const qqmapLink = "https://mmapgwh.map.qq.com/shortlink/short?l=_affc85625bc234bf115728bde2e21b2c"; // 腾讯
+        const bdmapLink = "https://j.map.baidu.com/31/aNYk"; // 百度
+
+        // 高德地图跳转（用分享链接）
+        document.getElementById('amap').onclick = () => {
+            location.href = amapLink;
+        };
+        
+        // 腾讯地图跳转（用分享链接）
+        document.getElementById('qqmap').onclick = () => {
+            location.href = qqmapLink;
+        };
+        
+        // 百度地图跳转（用分享链接）
+        document.getElementById('bdmap').onclick = () => {
+            location.href = bdmapLink;
+        };
+    </script>
+</body>
+</html>
