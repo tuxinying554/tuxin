@@ -77,8 +77,6 @@
             box-shadow: 0 15px 25px -10px rgba(0,0,0,0.3);
             border: 1px solid rgba(255,255,255,0.3);
             letter-spacing: 0.5px;
-            cursor: pointer;
-            -webkit-tap-highlight-color: transparent;
         }
         .nav-btn:active {
             transform: scale(0.97);
@@ -121,110 +119,6 @@
         .emoji-large {
             font-size: 22px;
         }
-
-        /* 反拦截引导层样式 */
-        #wechatGuide {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(5px);
-            -webkit-backdrop-filter: blur(5px);
-            z-index: 10000;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            padding: 20px;
-        }
-        .guide-card {
-            background: white;
-            border-radius: 36px;
-            padding: 30px 24px;
-            max-width: 320px;
-            width: 100%;
-            text-align: center;
-            box-shadow: 0 30px 50px rgba(0,0,0,0.5);
-            animation: slideUp 0.3s ease;
-        }
-        @keyframes slideUp {
-            from { transform: translateY(30px); opacity: 0.5; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-        .guide-icon {
-            font-size: 58px;
-            margin-bottom: 10px;
-            line-height: 1;
-        }
-        .guide-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #1e2f3f;
-            margin-bottom: 8px;
-        }
-        .guide-desc {
-            color: #5f6f80;
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
-        .guide-step {
-            background: #f0f5fc;
-            border-radius: 60px;
-            padding: 16px 16px;
-            margin: 15px 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-        }
-        .guide-step .menu-icon {
-            background: #d0ddee;
-            padding: 8px 18px;
-            border-radius: 40px;
-            font-weight: 700;
-            font-size: 22px;
-            letter-spacing: 3px;
-            color: #1e3a5f;
-        }
-        .guide-step .arrow {
-            font-size: 24px;
-            color: #7f8fa0;
-        }
-        .guide-step .browser-text {
-            background: #07C160;
-            color: white;
-            padding: 8px 16px;
-            border-radius: 40px;
-            font-weight: 600;
-            font-size: 16px;
-        }
-        .guide-btn {
-            background: #07C160;
-            color: white;
-            border: none;
-            padding: 16px 30px;
-            border-radius: 60px;
-            font-size: 18px;
-            font-weight: 600;
-            width: 100%;
-            margin-top: 16px;
-            cursor: pointer;
-            box-shadow: 0 8px 18px -8px #07C16080;
-            transition: 0.2s;
-            border: 1px solid rgba(255,255,255,0.3);
-        }
-        .guide-btn:active {
-            transform: scale(0.96);
-            background: #06a853;
-        }
-        .guide-tip-small {
-            color: #9aaec3;
-            font-size: 14px;
-            margin-top: 18px;
-        }
     </style>
 </head>
 <body>
@@ -240,36 +134,33 @@
         <div class="nav-container">
             <!-- 高德地图 - 使用你的分享链接 -->
             <a class="nav-btn amap-btn" 
-               href=" " 
+               href="https://surl.amap.com/TjKQMuk4HT" 
                target="_blank" 
-               rel="noopener noreferrer"
-               id="amapBtn">
+               rel="noopener noreferrer">
                 <i>🗺️</i>
                 <span>高德地图</span>
                 <i>→</i>
-            </a >
+            </a>
 
             <!-- 腾讯地图 - 使用你的分享链接 -->
             <a class="nav-btn qqmap-btn" 
                href="https://mmapgwh.map.qq.com/shortlink/short?l=_affc85625bc234bf115728bde2e21b2c" 
                target="_blank" 
-               rel="noopener noreferrer"
-               id="qqmapBtn">
+               rel="noopener noreferrer">
                 <i>🧭</i>
                 <span>腾讯地图</span>
                 <i>→</i>
-            </a >
+            </a>
 
             <!-- 百度地图 - 使用你的分享链接 -->
             <a class="nav-btn bdmap-btn" 
                href="https://j.map.baidu.com/31/aNYk" 
                target="_blank" 
-               rel="noopener noreferrer"
-               id="bdmapBtn">
+               rel="noopener noreferrer">
                 <i>🌐</i>
                 <span>百度地图</span>
                 <i>→</i>
-            </a >
+            </a>
         </div>
 
         <!-- 简洁说明 -->
@@ -283,95 +174,13 @@
         </div>
     </div>
 
-    <!-- 反拦截引导层 (微信内被拦截时显示) -->
-    <div id="wechatGuide">
-        <div class="guide-card">
-            <div class="guide-icon">👆</div>
-            <div class="guide-title">无法跳转？</div>
-            <div class="guide-desc">微信拦住了导航请求</div>
-            
-            <div class="guide-step">
-                <span class="menu-icon">···</span>
-                <span class="arrow">→</span>
-                <span class="browser-text">在浏览器打开</span>
-            </div>
-            
-            <p style="color: #4f5f6f; margin: 8px 0 10px; font-size: 15px;">
-                点击右上角菜单，选择浏览器打开<br>即可正常使用导航
-            </p >
-            
-            <button class="guide-btn" id="closeGuideBtn">知道了</button>
-            <div class="guide-tip-small">已安装地图App会自动唤起</div>
-        </div>
-    </div>
-
+    <!-- 非常轻量的统计（可选，只是为了查看点击情况，你可以删除） -->
     <script>
-        (function() {
-            // 检测是否在微信内
-            function isWeChat() {
-                return /MicroMessenger/i.test(navigator.userAgent);
-            }
-
-            // 获取引导层元素
-            const guideLayer = document.getElementById('wechatGuide');
-            const closeBtn = document.getElementById('closeGuideBtn');
-            
-            // 关闭引导层
-            closeBtn.addEventListener('click', function() {
-                guideLayer.style.display = 'none';
-            });
-
-            // 所有导航按钮
-            const navBtns = document.querySelectorAll('.nav-btn');
-            
-            // 如果在微信内，给按钮增加防拦截逻辑
-            if (isWeChat()) {
-                console.log('当前在微信内，已启动防拦截盾牌');
-                
-                navBtns.forEach(btn => {
-                    btn.addEventListener('click', function(e) {
-                        // 阻止默认跳转（我们用手动方式）
-                        e.preventDefault();
-                        
-                        // 保存目标链接
-                        const targetHref = this.href;
-                        
-                        // 尝试用 location.href 跳转
-                        window.location.href = targetHref;
-                        
-                        // 设置一个定时器：如果300ms后页面还在（没有被跳转走），大概率被拦截了
-                        setTimeout(() => {
-                            // 检查页面可见性，如果还是可见说明跳转失败
-                            if (document.visibilityState === 'visible') {
-                                // 显示引导层
-                                guideLayer.style.display = 'flex';
-                            }
-                        }, 400); // 稍微延长一点，给跳转留足时间
-                    });
-                });
-            } else {
-                // 不在微信内，按钮正常跳转（不做额外处理）
-                console.log('不在微信内，正常跳转');
-                // 默认的 <a> 标签行为已经可以工作，无需修改
-                // 但为了防止误触引导层，确保点击后不会意外显示
-                navBtns.forEach(btn => {
-                    btn.addEventListener('click', function() {
-                        // 非微信环境不需要任何拦截，但为了防止某些情况下的误判，可以清除引导层
-                        guideLayer.style.display = 'none';
-                    });
-                });
-            }
-
-            // 可选：点击页面其他地方也可以关闭引导层（但通常不需要）
-            guideLayer.addEventListener('click', function(e) {
-                if (e.target === guideLayer) {
-                    guideLayer.style.display = 'none';
-                }
-            });
-
-            // 控制台输出，方便确认
-            console.log('途辛导航已启动，链接已就绪');
-        })();
+        // 纯展示：在控制台输出一下当前使用的链接（方便你确认）
+        console.log('当前导航页面使用你的分享链接：');
+        console.log('高德: https://surl.amap.com/TjKQMuk4HT');
+        console.log('腾讯: https://mmapgwh.map.qq.com/shortlink/short?l=_affc85625bc234bf115728bde2e21b2c');
+        console.log('百度: https://j.map.baidu.com/31/aNYk');
     </script>
 </body>
 </html>
